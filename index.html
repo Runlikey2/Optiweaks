@@ -297,53 +297,60 @@
             { name: 'CS2', boost: '40-150', img: 'images/games/cs-2.png' }
         ];
 
-        let currentGameIndex = 4; // Default focus target: Overwatch
+        // Create 3 virtual sets of data to allow infinite looping layout boundaries
+        let virtualIndex = games.length + 4; // Focuses Overwatch inside the middle buffer set
         const carouselContainer = document.getElementById('carouselContainer');
         const carouselWrapper = document.getElementById('carouselWrapper');
 
         function generateCarouselItems() {
             carouselContainer.innerHTML = '';
-            games.forEach((game, index) => {
+            // Triple array map context allows seamless left/right wrapping
+            const loopedArray = [...games, ...games, ...games];
+            
+            loopedArray.forEach((game, index) => {
                 const item = document.createElement('div');
                 item.className = 'game-item';
-                item.setAttribute('data-index', index);
+                item.setAttribute('data-index', index % games.length);
                 
                 const img = document.createElement('img');
                 img.src = game.img;
                 img.alt = game.name;
-                
-                img.onerror = function() {
-                    this.style.background = '#222';
-                };
+                img.onerror = function() { this.style.background = '#222'; };
                 
                 item.appendChild(img);
                 
                 item.addEventListener('click', () => {
-                    currentGameIndex = index;
-                    updateCarouselPosition();
+                    virtualIndex = index;
+                    updateCarouselPosition(true);
                 });
 
                 carouselContainer.appendChild(item);
             });
         }
 
-        function updateCarouselPosition() {
-            const game = games[currentGameIndex];
+        function updateCarouselPosition(smooth = true) {
+            const actualIndex = virtualIndex % games.length;
+            const game = games[actualIndex];
             
-            // Render active center details directly beneath the structure
             document.querySelector('.perf-game-name').textContent = game.name;
             document.querySelector('.boost-number').textContent = game.boost;
             
             const items = document.querySelectorAll('.game-item');
             items.forEach((item, index) => {
-                if (index === currentGameIndex) {
+                if (index === virtualIndex) {
                     item.classList.add('active-highlight');
                 } else {
                     item.classList.remove('active-highlight');
                 }
             });
 
-            const activeItem = items[currentGameIndex];
+            if (smooth) {
+                carouselContainer.style.transition = 'transform 0.35s cubic-bezier(0.2, 1, 0.2, 1)';
+            } else {
+                carouselContainer.style.transition = 'none';
+            }
+
+            const activeItem = items[virtualIndex];
             if (activeItem) {
                 const wrapperWidth = carouselWrapper.offsetWidth;
                 const itemWidth = activeItem.offsetWidth;
@@ -353,15 +360,27 @@
                 carouselContainer.style.transform = `translateX(${transformX}px)`;
             }
         }
-        
+
+        // Invisible reset when crossing set boundary markers
+        carouselContainer.addEventListener('transitionend', () => {
+            if (virtualIndex < games.length) {
+                virtualIndex += games.length;
+                updateCarouselPosition(false);
+            } else if (virtualIndex >= games.length * 2) {
+                virtualIndex -= games.length;
+                updateCarouselPosition(false);
+            }
+        });
+
+        // Faster auto-scroll frequency (2 seconds)
         setInterval(() => {
-            currentGameIndex = (currentGameIndex + 1) % games.length;
-            updateCarouselPosition();
-        }, 4500);
+            virtualIndex++;
+            updateCarouselPosition(true);
+        }, 2000);
 
         generateCarouselItems();
-        window.addEventListener('load', updateCarouselPosition);
-        window.addEventListener('resize', updateCarouselPosition);
+        window.addEventListener('load', () => updateCarouselPosition(false));
+        window.addEventListener('resize', () => updateCarouselPosition(false));
     </script>
 </body>
 </html>
