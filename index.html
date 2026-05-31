@@ -58,8 +58,6 @@
             </div>
 
             <div class="performance-showcase">
-                <button class="nav-btn prev">&lt;</button>
-                
                 <div class="perf-info-block">
                     <div class="perf-text-group">
                         <div class="perf-game-name">OVERWATCH</div>
@@ -71,8 +69,6 @@
                         <span class="boost-unit">FPS</span>
                     </div>
                 </div>
-
-                <button class="nav-btn next">&gt;</button>
             </div>
         </div>
     </section>
@@ -301,8 +297,7 @@
             { name: 'CS2', boost: '40-150', img: 'images/games/cs-2.png' }
         ];
 
-        // Start with OVERWATCH (Index 4) active to recreate image_6a88e1 perfectly
-        let currentGameIndex = 4; 
+        let currentGameIndex = 4; // Default focus target: Overwatch
         const carouselContainer = document.getElementById('carouselContainer');
         const carouselWrapper = document.getElementById('carouselWrapper');
 
@@ -318,12 +313,11 @@
                 img.alt = game.name;
                 
                 img.onerror = function() {
-                    this.parentElement.style.display = 'none';
+                    this.style.background = '#222';
                 };
                 
                 item.appendChild(img);
                 
-                // Clicking cards slides them directly to center focus
                 item.addEventListener('click', () => {
                     currentGameIndex = index;
                     updateCarouselPosition();
@@ -336,7 +330,7 @@
         function updateCarouselPosition() {
             const game = games[currentGameIndex];
             
-            // Populate stats below the center layout block
+            // Render active center details directly beneath the structure
             document.querySelector('.perf-game-name').textContent = game.name;
             document.querySelector('.boost-number').textContent = game.boost;
             
@@ -349,7 +343,6 @@
                 }
             });
 
-            // Calculate precise pixel offset to lock the active item perfectly centered in the wrapper window
             const activeItem = items[currentGameIndex];
             if (activeItem) {
                 const wrapperWidth = carouselWrapper.offsetWidth;
@@ -360,395 +353,15 @@
                 carouselContainer.style.transform = `translateX(${transformX}px)`;
             }
         }
-
-        document.querySelector('.nav-btn.prev').addEventListener('click', () => {
-            currentGameIndex = (currentGameIndex - 1 + games.length) % games.length;
-            updateCarouselPosition();
-        });
-
-        document.querySelector('.nav-btn.next').addEventListener('click', () => {
+        
+        setInterval(() => {
             currentGameIndex = (currentGameIndex + 1) % games.length;
             updateCarouselPosition();
-        });
+        }, 4500);
 
-        // Initialize setup and center track calculations
         generateCarouselItems();
         window.addEventListener('load', updateCarouselPosition);
         window.addEventListener('resize', updateCarouselPosition);
-    </script>
-</body>
-</html><!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optiweaks Ultimate Esports Optimization</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-    <nav class="navbar">
-        <div class="container">
-            <div class="nav-brand">
-                <span class="brand-name">Optiweaks</span>
-            </div>
-            <div class="nav-links">
-                <a href="#features">Features</a>
-                <a href="#download">Download</a>
-                <a href="#faq">FAQ</a>
-            </div>
-        </div>
-    </nav>
-
-    <section class="hero">
-        <div class="hero-glow"></div>
-        <div class="container">
-            <div class="hero-badge">
-                <span class="badge-dot"></span>
-                <span>Trusted by our loyal Users!</span>
-            </div>
-            <h1 class="hero-title">
-                Instantly boost your Windows<br>
-                performance with one click.
-            </h1>
-            <p class="hero-subtitle">
-                Optiweaks is a PC optimization software built for performance enthusiasts.<br>
-                Get more FPS, smoother gameplay, and less lag.
-            </p>
-            <a href="#download" class="btn-primary btn-large">
-                <span>Download Free</span>
-            </a>
-            <div class="hero-visual">
-                <div class="performance-card">
-                    <div class="perf-value">+90</div>
-                    <div class="perf-label">AVG FPS</div>
-                    <div class="perf-bar"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="games-section">
-        <div class="container">
-            <h2 class="section-title">Boosts performance in all games</h2>
-            <p class="section-subtitle">Optiweaks safely optimizes your PC on system level</p>
-            
-            <div class="games-carousel-wrapper">
-                <div class="games-carousel" id="carouselContainer">
-                </div>
-            </div>
-
-            <div class="performance-showcase">
-                <div class="perf-game-name">VALORANT</div>
-                <div class="perf-boost-label">Average boost</div>
-                <div class="perf-boost-value">
-                    <span class="boost-number">30-120</span>
-                    <span class="boost-arrow">^</span>
-                    <span class="boost-unit">FPS</span>
-                </div>
-                <div class="carousel-nav">
-                    <button class="nav-btn prev">&lt;</button>
-                    <button class="nav-btn next">&gt;</button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="problem-section">
-        <div class="container">
-            <div class="section-label">Problem</div>
-            <h2 class="section-title">Your PC is leaving<br>performance on the table.</h2>
-            <div class="problem-grid">
-                <div class="problem-card">
-                    <h3>Unstable frame rates</h3>
-                    <p>kill your gameplay</p>
-                </div>
-                <div class="problem-card">
-                    <h3>Background processes</h3>
-                    <p>eating your resources</p>
-                </div>
-                <div class="problem-card">
-                    <h3>Thermal throttling</h3>
-                    <p>slows you down silently</p>
-                </div>
-                <div class="problem-card">
-                    <h3>Gigabytes of junk</h3>
-                    <p>slowing your drives</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="solution-section">
-        <div class="container">
-            <div class="section-label">Introducing Optiweaks</div>
-            <h2 class="section-title">Optiweaks optimizes your PC<br>on the system level.</h2>
-        </div>
-    </section>
-
-    <section id="features" class="features-showcase">
-        <div class="container">
-            <div class="showcase-carousel">
-                <div class="showcase-item active">
-                    <div class="showcase-image">
-                        <img src="images/screenshots/screenshot1.png" alt="Network Optimization" style="width: 100%; border-radius: 12px;">
-                    </div>
-                    <div class="showcase-content">
-                        <h3>Network Optimization</h3>
-                        <p>Advanced TCP/IP tweaks and DNS optimization for reduced latency and faster speeds in online games.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="carousel-dots">
-                <span class="dot active"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
-            </div>
-        </div>
-    </section>
-
-    <section class="trust-section">
-        <div class="container">
-            <div class="trust-grid">
-                <div class="trust-item">
-                    <div class="trust-content">
-                        <h4>Fully reversible</h4>
-                        <p>Every tweak can be rolled back with one click. No risky registry surgery, no broken Windows.</p>
-                    </div>
-                </div>
-                <div class="trust-item">
-                    <div class="trust-content">
-                        <h4>Safe & tested</h4>
-                        <p>Operates at system level, never touches game files. Used daily by thousands of users.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="features-list">
-        <div class="container">
-            <h2 class="section-title">Made for gamers,<br>useful for anyone.</h2>
-            <div class="features-grid">
-                <div class="feature-item">
-                    <div class="feature-number">01</div>
-                    <h3>Boost performance instantly</h3>
-                    <p>One-click optimization applies system tweaks for immediate results.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-number">02</div>
-                    <h3>Clear background clutter</h3>
-                    <p>Disable unnecessary services so your games run faster.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-number">03</div>
-                    <h3>Optimize your hardware</h3>
-                    <p>Tuned settings for your specific hardware configuration.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-number">04</div>
-                    <h3>Remove junk files</h3>
-                    <p>Free up memory and improve load times instantly.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-number">05</div>
-                    <h3>Smart thermal management</h3>
-                    <p>Balance mode for cool gameplay or performance mode for max FPS.</p>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-number">06</div>
-                    <h3>Track performance gains</h3>
-                    <p>Monitor improvements with real-time hardware stats.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section">
-        <div class="container">
-            <h2>Only performance software<br>you need.</h2>
-            <a href="#download" class="btn-primary btn-large">Download Free</a>
-        </div>
-    </section>
-
-    <section id="download" class="download-section">
-        <div class="container">
-            <div class="download-card">
-                <h2>Get Optiweaks</h2>
-                <div class="download-info">
-                    <div class="info-item">
-                        <div class="info-value">LightWeight</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-value">Win 10/11</div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-value">Free Forever!</div>
-                    </div>
-                </div>
-                <a href="https://downloads.optiweaks.com" class="btn-primary btn-large btn-download">
-                    <span>Download Optiweaks.exe</span>
-                </a>
-                <p class="download-note">No installation required v Just extract and run</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="faq" class="faq-section">
-        <div class="container">
-            <div class="section-label">FAQ</div>
-            <h2 class="section-title">Your questions, answered.</h2>
-            <div class="faq-list">
-                <details class="faq-item">
-                    <summary class="faq-question">
-                        <span>Is Optiweaks safe to use?</span>
-                        <span class="faq-icon">+</span>
-                    </summary>
-                    <div class="faq-answer">
-                        Yes. Optiweaks only modifies Windows settings and doesn't touch game files. All changes are reversible with one click.
-                    </div>
-                </details>
-                <details class="faq-item">
-                    <summary class="faq-question">
-                        <span>Will this work on my PC?</span>
-                        <span class="faq-icon">+</span>
-                    </summary>
-                    <div class="faq-answer">
-                        Optiweaks works on Windows 10 and Windows 11. It requires administrator privileges to apply system-level optimizations.
-                    </div>
-                </details>
-                <details class="faq-item">
-                    <summary class="faq-question">
-                        <span>Can I undo the changes?</span>
-                        <span class="faq-icon">+</span>
-                    </summary>
-                    <div class="faq-answer">
-                        Absolutely. Optiweaks creates restore points before making changes, and every tweak can be reverted instantly.
-                    </div>
-                </details>
-                <details class="faq-item">
-                    <summary class="faq-question">
-                        <span>Is it really free?</span>
-                        <span class="faq-icon">+</span>
-                    </summary>
-                    <div class="faq-answer">
-                        Yes, completely free. No hidden costs, no subscriptions, no license keys. Download and use all features without limitations.
-                    </div>
-                </details>
-                 <details class="faq-item">
-                    <summary class="faq-question">
-                        <span>Is it affliated with OptiTweaks?</span>
-                        <span class="faq-icon">+</span>
-                    </summary>
-                    <div class="faq-answer">
-                        No we are not affliated with OptiTweaks the offical OptiTweaks site is located at <a href="https://OptiTweaks.com" target="_blank">https://OptiTweaks.com</a>!
-                    </div>
-                </details>
-            </div>
-        </div>
-    </section>
-
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-brand">
-                    <span class="brand-name">Optiweaks</span>
-                    <p>Professional Windows optimization tool.</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2026 Optiweaks. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
-    <script>
-        const games = [
-            { name: 'VALORANT', boost: '30-120', img: 'images/games/valorant.png' },
-            { name: 'CS2', boost: '40-150', img: 'images/games/cs-2.png' },
-            { name: 'FORTNITE', boost: '25-100', img: 'images/games/fortnite.png' },
-            { name: 'MARVEL RIVALS', boost: '30-110', img: 'images/games/marvel-rivals.png' },
-            { name: 'CALL OF DUTY', boost: '20-90', img: 'images/games/call-of-duty-bo3.png' },
-            { name: 'OVERWATCH', boost: '45-130', img: 'images/games/overwatch.png' },
-            { name: 'RUST', boost: '30-95', img: 'images/games/rust.png' },
-            { name: 'DEADLOCK', boost: '50-140', img: 'images/games/deadlock.png' },
-            { name: 'BATTLEFIELD', boost: '25-95', img: 'images/games/battlefield-6.png' }
-        ];
-
-        let currentGameIndex = 0;
-        const carouselContainer = document.getElementById('carouselContainer');
-
-        function generateCarouselItems() {
-            carouselContainer.innerHTML = '';
-            const doubleGames = [...games, ...games, ...games];
-            doubleGames.forEach((game, index) => {
-                const item = document.createElement('div');
-                item.className = 'game-item';
-                item.setAttribute('data-original-index', index % games.length);
-                
-                const img = document.createElement('img');
-                img.src = game.img;
-                img.alt = game.name;
-                
-                const infoWrapper = document.createElement('div');
-                infoWrapper.className = 'game-info-wrapper';
-                
-                const title = document.createElement('div');
-                title.className = 'game-title-fallback';
-                title.textContent = game.name;
-                
-                const tag = document.createElement('div');
-                tag.className = 'game-boost-tag';
-                tag.textContent = '+' + game.boost.split('-')[1] + ' FPS';
-                
-                infoWrapper.appendChild(title);
-                infoWrapper.appendChild(tag);
-                
-                img.onerror = function() {
-                    this.style.display = 'none';
-                };
-                
-                item.appendChild(img);
-                item.appendChild(infoWrapper);
-                carouselContainer.appendChild(item);
-            });
-        }
-
-        function updatePerformanceShowcase() {
-            const game = games[currentGameIndex];
-            document.querySelector('.perf-game-name').textContent = game.name;
-            document.querySelector('.boost-number').textContent = game.boost;
-            
-            const allItems = document.querySelectorAll('.game-item');
-            allItems.forEach(item => {
-                const origIdx = parseInt(item.getAttribute('data-original-index'));
-                if (origIdx === currentGameIndex) {
-                    item.classList.add('active-highlight');
-                } else {
-                    item.classList.remove('active-highlight');
-                }
-            });
-        }
-
-        document.querySelector('.nav-btn.prev').addEventListener('click', () => {
-            currentGameIndex = (currentGameIndex - 1 + games.length) % games.length;
-            updatePerformanceShowcase();
-        });
-
-        document.querySelector('.nav-btn.next').addEventListener('click', () => {
-            currentGameIndex = (currentGameIndex + 1) % games.length;
-            updatePerformanceShowcase();
-        });
-
-        generateCarouselItems();
-        updatePerformanceShowcase();
-
-        setInterval(() => {
-            currentGameIndex = (currentGameIndex + 1) % games.length;
-            updatePerformanceShowcase();
-        }, 5000);
     </script>
 </body>
 </html>
