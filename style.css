@@ -239,7 +239,7 @@ body {
     border-radius: 2px;
 }
 
-/* CAROUSEL & VISUALS */
+/* CAROUSEL */
 .games-section {
     padding: 80px 0;
     background: var(--bg-secondary);
@@ -266,85 +266,86 @@ body {
     position: relative;
     width: 100%;
     overflow: hidden;
-    margin-bottom: 40px;
-    padding: 20px 0;
+    margin-bottom: 30px;
+    padding: 30px 0;
 }
 
-/* Masking gradients on left and right edges like reference */
+/* Edge mask gradients */
 .games-carousel-wrapper::before,
 .games-carousel-wrapper::after {
     content: '';
     position: absolute;
     top: 0;
     bottom: 0;
-    width: 150px;
+    width: 180px;
     z-index: 2;
     pointer-events: none;
 }
 .games-carousel-wrapper::before {
     left: 0;
-    background: linear-gradient(to right, var(--bg-secondary) 20%, transparent);
+    background: linear-gradient(to right, var(--bg-secondary) 25%, transparent);
 }
 .games-carousel-wrapper::after {
     right: 0;
-    background: linear-gradient(to left, var(--bg-secondary) 20%, transparent);
+    background: linear-gradient(to left, var(--bg-secondary) 25%, transparent);
 }
 
 .games-carousel {
     display: flex;
-    gap: 16px;
+    gap: 20px;
     width: max-content;
-    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    transition: transform 0.6s cubic-bezier(0.2, 1, 0.2, 1);
     will-change: transform;
 }
 
-/* Strict Vertical Card Layout matching image_6a88e1.jpg */
+/* Rigid vertical aspect boxes */
 .game-item {
     flex-shrink: 0;
-    width: 160px;
+    width: 170px;
     aspect-ratio: 2 / 3;
-    background: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: #000;
+    border: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: 12px;
     overflow: hidden;
-    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+    transition: transform 0.5s ease, border-color 0.5s ease, box-shadow 0.5s ease, filter 0.5s ease;
     cursor: pointer;
     position: relative;
-    filter: brightness(0.4);
+    filter: brightness(0.35);
 }
 
+/* Force standard imagery to completely cover internal dimensions */
 .game-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    display: block;
 }
 
-/* Highlight Selected Center Element */
+/* Focal Active Card Styling */
 .game-item.active-highlight {
-    transform: scale(1.15);
-    border-color: rgba(255, 255, 255, 0.5);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.1);
+    transform: scale(1.18);
+    border-color: rgba(255, 255, 255, 0.45);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.9), 0 0 25px rgba(255, 255, 255, 0.05);
     z-index: 3;
     filter: brightness(1);
 }
 
-/* Performance Tracker Directly Under Center Card */
+/* PERFECTLY CENTERED SHOWCASE INFO */
 .performance-showcase {
-    max-width: 600px;
+    max-width: 400px;
     margin: 0 auto;
     display: flex;
-    align-items: center;
     justify-content: center;
-    gap: 32px;
-    padding-top: 10px;
+    align-items: center;
+    padding-top: 15px;
 }
 
 .perf-info-block {
     display: flex;
     align-items: center;
-    gap: 24px;
+    justify-content: center;
+    gap: 28px;
     text-align: left;
-    min-width: 260px;
 }
 
 .perf-text-group {
@@ -353,11 +354,11 @@ body {
 }
 
 .perf-game-name {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: 700;
     color: var(--text-primary);
     text-transform: uppercase;
-    letter-spacing: 1px;
+    letter-spacing: 1.5px;
 }
 
 .perf-boost-label {
@@ -372,16 +373,17 @@ body {
 }
 
 .boost-number {
-    font-size: 38px;
+    font-size: 42px;
     font-weight: 700;
     color: var(--text-primary);
+    line-height: 1;
 }
 
 .boost-arrow {
-    font-size: 20px;
+    font-size: 22px;
     color: var(--accent-primary);
-    margin-left: 4px;
-    font-weight: 800;
+    margin-left: 2px;
+    font-weight: 900;
 }
 
 .boost-unit {
@@ -391,34 +393,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* Arrow Navigation Buttons */
-.carousel-nav {
-    display: flex;
-    gap: 16px;
-}
-
-.nav-btn {
-    width: 40px;
-    height: 40px;
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    border-radius: 50%;
-    color: var(--text-secondary);
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.nav-btn:hover {
-    background: var(--text-primary);
-    color: #000;
-    border-color: var(--text-primary);
-}
-
-/* PROBLEMS & LOWER SYSTEM */
+/* PROBLEMS & UTILITIES */
 .problem-section {
     padding: 100px 0;
 }
@@ -483,18 +458,6 @@ body {
     margin-bottom: 40px;
 }
 
-.placeholder-box {
-    aspect-ratio: 16/10;
-    background: var(--bg-card);
-    border: 2px dashed var(--border-color);
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--text-muted);
-    font-size: 14px;
-}
-
 .showcase-content h3 {
     font-size: 32px;
     font-weight: 700;
@@ -547,20 +510,6 @@ body {
 .trust-item {
     display: flex;
     gap: 20px;
-}
-
-.trust-icon {
-    width: 48px;
-    height: 48px;
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 24px;
-    color: var(--accent-primary);
-    flex-shrink: 0;
 }
 
 .trust-content h4 {
@@ -764,6 +713,11 @@ body {
     
     .nav-links {
         display: none;
+    }
+    
+    .games-carousel-wrapper::before,
+    .games-carousel-wrapper::after {
+        width: 80px;
     }
 }
 
