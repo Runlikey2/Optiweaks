@@ -31,6 +31,7 @@ body {
     padding: 0 24px;
 }
 
+/* NAVBAR */
 .navbar {
     position: fixed;
     top: 0;
@@ -105,6 +106,7 @@ body {
     font-size: 16px;
 }
 
+/* HERO */
 .hero {
     min-height: 100vh;
     display: flex;
@@ -237,6 +239,7 @@ body {
     border-radius: 2px;
 }
 
+/* CAROUSEL & VISUALS */
 .games-section {
     padding: 80px 0;
     background: var(--bg-secondary);
@@ -260,173 +263,162 @@ body {
 }
 
 .games-carousel-wrapper {
-    overflow: hidden;
-    margin-bottom: 60px;
     position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 40px;
+    padding: 20px 0;
+}
+
+/* Masking gradients on left and right edges like reference */
+.games-carousel-wrapper::before,
+.games-carousel-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 150px;
+    z-index: 2;
+    pointer-events: none;
+}
+.games-carousel-wrapper::before {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-secondary) 20%, transparent);
+}
+.games-carousel-wrapper::after {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-secondary) 20%, transparent);
 }
 
 .games-carousel {
     display: flex;
-    gap: 24px;
-    animation: scroll 30s linear infinite;
-    width: fit-content;
+    gap: 16px;
+    width: max-content;
+    transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    will-change: transform;
 }
 
-@keyframes scroll {
-    0% {
-        transform: translateX(0);
-    }
-    100% {
-        transform: translateX(-50%);
-    }
-}
-
-.games-carousel:hover {
-    animation-play-state: paused;
-}
-
+/* Strict Vertical Card Layout matching image_6a88e1.jpg */
 .game-item {
     flex-shrink: 0;
-    width: 200px;
-    height: 120px;
+    width: 160px;
+    aspect-ratio: 2 / 3;
     background: var(--bg-card);
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 16px;
-    transition: all 0.3s;
     overflow: hidden;
-    padding: 12px;
-}
-
-.game-item.active-highlight {
-    border-color: var(--accent-primary);
-    background: linear-gradient(135deg, rgba(34, 197, 94, 0.15), rgba(0, 0, 0, 0.6));
-    box-shadow: 0 8px 24px var(--accent-glow);
-    transform: translateY(-4px);
-}
-
-.game-item:hover {
-    border-color: var(--accent-primary);
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px var(--accent-glow);
+    transition: transform 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease, filter 0.4s ease;
+    cursor: pointer;
+    position: relative;
+    filter: brightness(0.4);
 }
 
 .game-item img {
-    width: 70px;
+    width: 100%;
     height: 100%;
     object-fit: cover;
-    border-radius: 6px;
-    filter: brightness(0.8);
-    transition: filter 0.3s;
-    flex-shrink: 0;
 }
 
-.game-item.active-highlight img,
-.game-item:hover img {
-    filter: brightness(1.1);
+/* Highlight Selected Center Element */
+.game-item.active-highlight {
+    transform: scale(1.15);
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8), 0 0 20px rgba(255, 255, 255, 0.1);
+    z-index: 3;
+    filter: brightness(1);
 }
 
-.game-info-wrapper {
+/* Performance Tracker Directly Under Center Card */
+.performance-showcase {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 32px;
+    padding-top: 10px;
+}
+
+.perf-info-block {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    text-align: left;
+    min-width: 260px;
+}
+
+.perf-text-group {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.game-title-fallback {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text-primary);
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.game-boost-tag {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--text-primary);
-    margin-top: 4px;
-    white-space: nowrap;
-}
-
-.performance-showcase {
-    text-align: center;
-    padding: 48px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    position: relative;
 }
 
 .perf-game-name {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 700;
-    color: var(--text-secondary);
-    letter-spacing: 2px;
-    margin-bottom: 12px;
+    color: var(--text-primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
 }
 
 .perf-boost-label {
     font-size: 13px;
     color: var(--text-muted);
-    margin-bottom: 16px;
 }
 
 .perf-boost-value {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
+    align-items: baseline;
+    gap: 4px;
 }
 
 .boost-number {
-    font-size: 56px;
+    font-size: 38px;
     font-weight: 700;
-    color: var(--accent-primary);
+    color: var(--text-primary);
 }
 
 .boost-arrow {
-    font-size: 32px;
+    font-size: 20px;
     color: var(--accent-primary);
+    margin-left: 4px;
+    font-weight: 800;
 }
 
 .boost-unit {
-    font-size: 24px;
-    color: var(--text-secondary);
-    font-weight: 600;
+    font-size: 14px;
+    color: var(--text-muted);
+    font-weight: 700;
+    letter-spacing: 0.5px;
 }
 
+/* Arrow Navigation Buttons */
 .carousel-nav {
     display: flex;
-    gap: 12px;
-    justify-content: center;
-    margin-top: 32px;
+    gap: 16px;
 }
 
 .nav-btn {
     width: 40px;
     height: 40px;
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
-    color: var(--accent-primary);
-    font-size: 18px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+    color: var(--text-secondary);
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     transition: all 0.2s;
 }
 
 .nav-btn:hover {
-    background: var(--accent-primary);
+    background: var(--text-primary);
     color: #000;
-    border-color: var(--accent-primary);
+    border-color: var(--text-primary);
 }
 
+/* PROBLEMS & LOWER SYSTEM */
 .problem-section {
     padding: 100px 0;
 }
