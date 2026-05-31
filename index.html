@@ -264,7 +264,7 @@
                         <span class="faq-icon">+</span>
                     </summary>
                     <div class="faq-answer">
-                        No we are not affliated with OptiTweaks the offical OptiTweaks site is located at <a href="https://OptiTweaks.com" target="_blank">OptiTweaks.com</a>!
+                        No we are not affliated with OptiTweaks the offical OptiTweaks site is located at <a href="https://OptiTweaks.com" target="_blank">https://OptiTweaks.com</a>!
                     </div>
                 </details>
             </div>
@@ -312,20 +312,27 @@
                 const img = document.createElement('img');
                 img.src = game.img;
                 img.alt = game.name;
-                img.onerror = function() {
-                    this.style.display = 'none';
-                    const fallback = document.createElement('div');
-                    fallback.className = 'game-title-fallback';
-                    fallback.textContent = game.name;
-                    item.insertBefore(fallback, item.firstChild);
-                };
+                
+                const infoWrapper = document.createElement('div');
+                infoWrapper.className = 'game-info-wrapper';
+                
+                const title = document.createElement('div');
+                title.className = 'game-title-fallback';
+                title.textContent = game.name;
                 
                 const tag = document.createElement('div');
                 tag.className = 'game-boost-tag';
                 tag.textContent = '+' + game.boost.split('-')[1] + ' FPS';
                 
+                infoWrapper.appendChild(title);
+                infoWrapper.appendChild(tag);
+                
+                img.onerror = function() {
+                    this.style.display = 'none';
+                };
+                
                 item.appendChild(img);
-                item.appendChild(tag);
+                item.appendChild(infoWrapper);
                 carouselContainer.appendChild(item);
             });
         }
