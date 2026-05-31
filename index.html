@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Optiweaks - Professional Windows System Optimizer</title>
+    <title>Optiweaks Ultimate Esports Optimization</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -54,43 +54,7 @@
             <p class="section-subtitle">Optiweaks safely optimizes your PC on system level</p>
             
             <div class="games-carousel-wrapper">
-                <div class="games-carousel">
-                    <div class="game-item">
-                        <img src="images/games/valorant.png" alt="Valorant">
-                    </div>
-                    <div class="game-item">
-                        <img src="images/games/cs-2.png" alt="CS2">
-                    </div>
-                    <div class="game-item">
-                        <img src="images/games/fortnite.png" alt="Fortnite">
-                    </div>
-                    <div class="game-item">
-                        <img src="images/games/marvel-rivals.png" alt="Marvel Rivals">
-                    </div>
-                    <div class="game-item">
-                        <img src="images/games/call-of-duty-bo3.png" alt="Call of Duty">
-                    </div>
-                    <div class="game-item">
-                        <img src="images/games/overwatch.png" alt="Overwatch">
-                    </div>
-                    <div class="game-item">
-                        <img src="images/games/rust.png" alt="Rust">
-                    </div>
-                    <div class="game-item">
-                        <img src="images/games/deadlock.png" alt="Deadlock">
-                    </div>
-                    <div class="game-item">
-                        <img src="images/games/battlefield-6.png" alt="Battlefield">
-                    </div>
-                    <div class="game-item">
-                        <img src="images/games/valorant.png" alt="Valorant">
-                    </div>
-                    <div class="game-item">
-                        <img src="images/games/cs-2.png" alt="CS2">
-                    </div>
-                    <div class="game-item">
-                        <img src="images/games/fortnite.png" alt="Fortnite">
-                    </div>
+                <div class="games-carousel" id="carouselContainer">
                 </div>
             </div>
 
@@ -99,12 +63,12 @@
                 <div class="perf-boost-label">Average boost</div>
                 <div class="perf-boost-value">
                     <span class="boost-number">30-120</span>
-                    <span class="boost-arrow">↑</span>
+                    <span class="boost-arrow">^</span>
                     <span class="boost-unit">FPS</span>
                 </div>
                 <div class="carousel-nav">
-                    <button class="nav-btn prev">←</button>
-                    <button class="nav-btn next">→</button>
+                    <button class="nav-btn prev">&lt;</button>
+                    <button class="nav-btn next">&gt;</button>
                 </div>
             </div>
         </div>
@@ -245,10 +209,10 @@
                         <div class="info-value">Free Forever!</div>
                     </div>
                 </div>
-                <a href="#" class="btn-primary btn-large btn-download">
+                <a href="https://downloads.optiweaks.com" class="btn-primary btn-large btn-download">
                     <span>Download Optiweaks.exe</span>
                 </a>
-                <p class="download-note">No installation required • Just extract and run</p>
+                <p class="download-note">No installation required v Just extract and run</p>
             </div>
         </div>
     </section>
@@ -300,7 +264,7 @@
                         <span class="faq-icon">+</span>
                     </summary>
                     <div class="faq-answer">
-                        No we are not affliated with OptiTweaks the offical OptiTweaks site is located at <a href="https://OptiTweaks.com" target="_blank">https://OptiTweaks.com</a>!
+                        No we are not affliated with OptiTweaks the offical OptiTweaks site is located at <a href="https://OptiTweaks.com" target="_blank">OptiTweaks.com</a>!
                     </div>
                 </details>
             </div>
@@ -316,29 +280,70 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2026 Optiweaks. All rights reserved.</p>
+                <p>&copy; 2026 Optiweaks. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
         const games = [
-            { name: 'VALORANT', boost: '30-120' },
-            { name: 'CS2', boost: '40-150' },
-            { name: 'FORTNITE', boost: '25-100' },
-            { name: 'APEX LEGENDS', boost: '35-110' },
-            { name: 'WARZONE', boost: '20-90' },
-            { name: 'OVERWATCH', boost: '45-130' },
-            { name: 'RUST', boost: '30-95' },
-            { name: 'DEADLOCK', boost: '50-140' }
+            { name: 'VALORANT', boost: '30-120', img: 'images/games/valorant.png' },
+            { name: 'CS2', boost: '40-150', img: 'images/games/cs-2.png' },
+            { name: 'FORTNITE', boost: '25-100', img: 'images/games/fortnite.png' },
+            { name: 'MARVEL RIVALS', boost: '30-110', img: 'images/games/marvel-rivals.png' },
+            { name: 'CALL OF DUTY', boost: '20-90', img: 'images/games/call-of-duty-bo3.png' },
+            { name: 'OVERWATCH', boost: '45-130', img: 'images/games/overwatch.png' },
+            { name: 'RUST', boost: '30-95', img: 'images/games/rust.png' },
+            { name: 'DEADLOCK', boost: '50-140', img: 'images/games/deadlock.png' },
+            { name: 'BATTLEFIELD', boost: '25-95', img: 'images/games/battlefield-6.png' }
         ];
 
         let currentGameIndex = 0;
+        const carouselContainer = document.getElementById('carouselContainer');
+
+        function generateCarouselItems() {
+            carouselContainer.innerHTML = '';
+            const doubleGames = [...games, ...games, ...games];
+            doubleGames.forEach((game, index) => {
+                const item = document.createElement('div');
+                item.className = 'game-item';
+                item.setAttribute('data-original-index', index % games.length);
+                
+                const img = document.createElement('img');
+                img.src = game.img;
+                img.alt = game.name;
+                img.onerror = function() {
+                    this.style.display = 'none';
+                    const fallback = document.createElement('div');
+                    fallback.className = 'game-title-fallback';
+                    fallback.textContent = game.name;
+                    item.insertBefore(fallback, item.firstChild);
+                };
+                
+                const tag = document.createElement('div');
+                tag.className = 'game-boost-tag';
+                tag.textContent = '+' + game.boost.split('-')[1] + ' FPS';
+                
+                item.appendChild(img);
+                item.appendChild(tag);
+                carouselContainer.appendChild(item);
+            });
+        }
 
         function updatePerformanceShowcase() {
             const game = games[currentGameIndex];
             document.querySelector('.perf-game-name').textContent = game.name;
             document.querySelector('.boost-number').textContent = game.boost;
+            
+            const allItems = document.querySelectorAll('.game-item');
+            allItems.forEach(item => {
+                const origIdx = parseInt(item.getAttribute('data-original-index'));
+                if (origIdx === currentGameIndex) {
+                    item.classList.add('active-highlight');
+                } else {
+                    item.classList.remove('active-highlight');
+                }
+            });
         }
 
         document.querySelector('.nav-btn.prev').addEventListener('click', () => {
@@ -350,6 +355,9 @@
             currentGameIndex = (currentGameIndex + 1) % games.length;
             updatePerformanceShowcase();
         });
+
+        generateCarouselItems();
+        updatePerformanceShowcase();
 
         setInterval(() => {
             currentGameIndex = (currentGameIndex + 1) % games.length;
