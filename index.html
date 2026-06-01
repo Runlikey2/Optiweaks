@@ -94,7 +94,7 @@
                     <h3>Gigabytes of junk</h3>
                     <p>slowing your drives</p>
                 </div>
-                <div class="problem-card">
+                <div class="problem-card-center">
                     <h3>Out of date drivers</h3>
                     <p>causing stutters and bad performance</p>
                 </div>
@@ -365,7 +365,6 @@
             }
         }
 
-        // Invisible reset when crossing set boundary markers
         carouselContainer.addEventListener('transitionend', () => {
             if (virtualIndex < games.length) {
                 virtualIndex += games.length;
@@ -376,7 +375,6 @@
             }
         });
 
-        // Faster auto-scroll frequency (2 seconds)
         setInterval(() => {
             virtualIndex++;
             updateCarouselPosition(true);
