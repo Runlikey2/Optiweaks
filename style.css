@@ -162,24 +162,9 @@ body {
 }
 
 .hero-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    background: rgba(34, 197, 94, 0.1);
-    border: 1px solid var(--border-color);
-    padding: 8px 16px;
-    border-radius: 20px;
-    font-size: 13px;
-    color: var(--text-secondary);
-    margin-bottom: 32px;
-}
-
-.badge-dot {
-    width: 6px;
-    height: 6px;
-    background: var(--accent-primary);
-    border-radius: 50%;
-    animation: pulse 2s infinite;
+    background: rgba(0, 0, 0, 0.19);
+    border: 1px solid rgba(255, 255, 255, 0.08); 
+    border-radius: 99px;                          
 }
 
 @keyframes pulse {
