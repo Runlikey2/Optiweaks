@@ -301,7 +301,7 @@ body {
 .game-item {
     flex-shrink: 0;
     width: 170px;
-    aspect-ratio: 2 / 3;
+    aspect-ratio: 2 / 4;
     background: #000;
     border: 1px solid rgba(255, 255, 255, 0.04);
     border-radius: 12px;
