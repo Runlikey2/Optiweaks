@@ -162,9 +162,23 @@ body {
 }
 
 .hero-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background: rgba(0, 0, 0, 0.19);
     border: 1px solid rgba(255, 255, 255, 0.08); 
-    border-radius: 99px;                          
+    max-height: 34px;
+    padding: 8px 20px; 
+    border-radius: 99px;
+    margin-bottom: 32px;
+}
+
+.hero-badge span {
+    font-size: 13px;
+    font-weight: 400;
+    color: #a3a3a3; 
+    letter-spacing: -0.1px;
+    line-height: 1;
 }
 
 @keyframes pulse {
