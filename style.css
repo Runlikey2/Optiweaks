@@ -80,25 +80,31 @@ body {
 }
 
 .btn-primary {
-    background: var(--accent-primary);
-    color: #000;
-    padding: 12px 24px;
-    border-radius: 8px;
-    text-decoration: none;
-    font-weight: 600;
+    background: linear-gradient(to right, #8e8e93 0%, #dedede 30%, #ffffff 50%, #dedede 70%, #8e8e93 100%);
+    color: #000000;
+    font-weight: 500;
     font-size: 15px;
+    letter-spacing: -0.2px;
+    padding: 14px 36px;
+    border-radius: 50px; 
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    transition: all 0.2s;
-    border: none;
+    text-decoration: none;
     cursor: pointer;
+    box-shadow: 
+        inset 0 1px 2px rgba(255, 255, 255, 0.8), 
+        0 4px 12px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    transition: filter 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .btn-primary:hover {
-    background: var(--accent-secondary);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 24px var(--accent-glow);
+    filter: brightness(1.08); 
+    transform: translateY(-1px);
+    box-shadow: 
+        inset 0 1px 2px rgba(255, 255, 255, 0.9), 
+        0 6px 16px rgba(0, 0, 0, 0.8);
 }
 
 .btn-large {
