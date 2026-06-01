@@ -31,6 +31,12 @@ body {
     padding: 0 24px;
 }
 
+@keyframes fluidFloat {
+    0% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); } 
+    100% { transform: translateY(0px); }
+}
+
 /* NAVBAR */
 .navbar {
     position: fixed;
@@ -211,13 +217,15 @@ body {
 }
 
 .performance-card {
-    background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(34, 197, 94, 0.05));
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 40px 60px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+    animation: fluidFloat 6s ease-in-out infinite;
+    will-change: transform;
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+
+.performance-card:hover {
+    animation-play-state: paused; 
+    transform: translateY(-12px) scale(1.01); /* Crisp, responsive lift upward */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7), 0 0 30px rgba(34, 197, 94, 0.1);
 }
 
 .performance-card::before {
